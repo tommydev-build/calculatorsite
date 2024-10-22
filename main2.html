@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Calculator</title>
+  <style>
+    /* Add some basic styling */
+    body {
+      font-family: Arial, sans-serif;
+    }
+    #calculator {
+      width: 200px;
+      margin: 20px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    #display {
+      width: 100%;
+      height: 40px;
+      margin-bottom: 20px;
+      padding: 10px;
+      border: none;
+      border-radius: 10px;
+      font-size: 24px;
+      text-align: right;
+    }
+    .button {
+      width: 40px;
+      height: 40px;
+      margin: 5px;
+      padding: 10px;
+      border: none;
+      border-radius: 10px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+    .button:hover {
+      background-color: #ccc;
+    }
+  </style>
+</head>
+<body>
+  <div id="calculator">
+    <input id="display" type="text" disabled>
+    <div>
+      <button class="button" onclick="clickNumber(7)">7</button>
+      <button class="button" onclick="clickNumber(8)">8</button>
+      <button class="button" onclick="clickNumber(9)">9</button>
+      
+    </div>
+    <div>
+      <button class="button" onclick="clickNumber(4)">4</button>
+      <button class="button" onclick="clickNumber(5)">5</button>
+      <button class="button" onclick="clickNumber(6)">6</button>
+    </div>
+    <div>
+      <button class="button" onclick="clickNumber(1)">1</button>
+      <button class="button" onclick="clickNumber(2)">2</button>
+      <button class="button" onclick="clickNumber(3)">3</button>  
+    </div>
+    <div>
+      <button class="button" onclick="clickNumber(0)">0</button>
+      <button class="button" onclick="clickDecimal()">.</button>
+      <button class="button" onclick="clickEquals()">=</button>
+    </div>
+    <div>
+      <button class="button" onclick="clickOperator('-')">-</button>
+      <button class="button" onclick="clickOperator('*')">*</button>
+      <button class="button" onclick="clickOperator('/')">/</button>
+      <button class="button" onclick="clickOperator('+')">+</button>
+    </div>
+  </div>
+
+  <script>
+    let displayValue = '';
+    let operator = '';
+    let firstOperand = '';
+    let secondOperand = '';
+
+    function clickNumber(number) {
+      displayValue += number.toString();
+      document.getElementById('display').value = displayValue;
+    }
+
+    function clickDecimal() {
+      if (!displayValue.includes('.')) {
+        displayValue += '.';
+        document.getElementById('display').value = displayValue;
+      }
+    }
+
+    function clickOperator(op) {
+      operator = op;
+      firstOperand = displayValue;
+      displayValue = '';
+      document.getElementById('display').value = displayValue;
+    }
+
+    function clickEquals() {
+      secondOperand = displayValue;
+      displayValue = '';
+      let result = eval(firstOperand + operator + secondOperand);
+      document.getElementById('display').value = result.toString();
+    }
+  </script>
+</body>
+</html>
